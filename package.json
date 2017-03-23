@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/jjwygjj/manage_make/issues"
   },
-  "homepage": "https://github.com/jjwygjj/manage_make#readme"
+  "homepage": "https://github.com/jjwygjj/manage_make#readme",
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15"
+  }
 }
