@@ -1,6 +1,6 @@
 # README
 
-## 管理 makefile 文件 已命令行形势
+## 管理 makefile 文件 以命令行形势
 
 ### 安装
 ```
@@ -8,6 +8,9 @@ npm install manage_make -g
 ```
 
 ### Makefile 文件用于引用makefile文件
+#### 本项目makefile文件所在位置
+https://github.com/barragepPlayer/make - automatic!
+#### include username/file
 ```
 include barragepPlayer/cw.mk
 
