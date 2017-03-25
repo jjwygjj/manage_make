@@ -9,7 +9,7 @@ npm install manage_make -g
 
 ### Makefile 文件用于引用makefile文件
 #### 本项目makefile文件所在位置
-https://github.com/barragepPlayer/make - automatic!
+https://github.com/barragepPlayer/make
 #### include username/file
 ```
 include barragepPlayer/cw.mk
