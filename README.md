@@ -4,7 +4,7 @@
 
 ### 安装
 ```
-npm install mmake -g
+npm install manage_make -g
 ```
 
 ### Makefile 文件用于引用makefile文件
