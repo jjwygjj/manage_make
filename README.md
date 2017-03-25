@@ -1,6 +1,6 @@
 # README
 
-## 管理 makefile 文件 以命令行形势
+## 管理 makefile 文件 以命令行方式管理
 
 ### 安装
 ```
