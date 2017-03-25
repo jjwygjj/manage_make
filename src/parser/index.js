@@ -1,16 +1,13 @@
-import {readline} from '../lib'
+import {getSources} from '../lib'
 
-export default class parse {
+class Parser {
   constructor() {
     this.annotations = []
     this.targets = []
   }
-  async getSources() {
-    return await readline();
-  }
 
   async parse() {
-    const sources = await this.getSources();
+    const sources = await getSources();
     let annotation = ''
     sources.forEach((source, index)=>{
       if(this.isAnnotation(source)) annotation += `${source.substr(1)}\n`
@@ -33,3 +30,5 @@ export default class parse {
     return data.indexOf(':') > -1 && data.indexOf('PHONY') == -1
   }
 }
+let parser = new Parser()
+export default parser
