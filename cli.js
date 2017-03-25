@@ -1,4 +1,5 @@
-require('./');
+require("babel-core/register");
+require("babel-polyfill");
 var helper = require('./src').helper;
 var pass = require('./src').pass;
 var fetch = require('./src').fetch;
