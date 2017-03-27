@@ -28,6 +28,7 @@ export async function getSources () {
   const includes = await getIncludes()
   let result = [];
   for (let inc of includes) {
+    if(!fileIsExist(`/usr/local/include/${inc.split(' ')[1]}`)) return []
     const source = await readline(`/usr/local/include/${inc.split(' ')[1]}`)
     result = result.concat(source)
   }
@@ -47,7 +48,7 @@ export function pass(commander,value) {
         return resolve()
       }
       if(data.toString().indexOf('Stop') > -1) {
-        console.log(`未找到合适命令${value}，请用help命令查看`);
+        console.log(`未找到合适命令${value}，请用help命令查看!`);
         return
       }
       console.log(`${data}`);
@@ -58,4 +59,8 @@ export function pass(commander,value) {
     });
   })
 
+}
+
+function fileIsExist (path) {
+  return fs.existsSync(path)
 }
