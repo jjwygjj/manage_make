@@ -1,4 +1,5 @@
 import {getSources} from '../lib'
+import R from 'ramda'
 
 class Parser {
   constructor() {
@@ -7,16 +8,16 @@ class Parser {
   }
 
   async parse() {
-    const sources = await getSources();
+    const io = await getSources();
     let annotation = ''
-    sources.forEach((source, index)=>{
+    R.forEach((source, index)=>{
       if(this.isAnnotation(source)) annotation += `${source.substr(1)}\n`
       if(this.isTarget(source)){
-        this.targets.push(source.split(':')[0])
+          this.targets.push(source.split(':')[0])
           this.annotations.push(annotation)
           annotation = ''
       }
-    })
+    }, io.result)
     return {
       annotations: this.annotations,
       targets: this.targets

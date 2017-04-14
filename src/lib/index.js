@@ -14,26 +14,25 @@ export function readline (file) {
       result.push(line)
     });
     rl.on('close', () => {
-      resolve(result)
+      resolve(new IO(result, ''))
     });
   }).then()
 }
 export async function getIncludes () {
   const file = path.normalize(`${__dirname}/../../Makefile`)
-  const inc = await readline(file)
-  return inc
+  return await readline(file)
 }
 
 export async function getSources () {
-  const includes = await getIncludes()
+  const io = await getIncludes()
   let result = [];
-  for (let inc of includes) {
-    if(!fileIsExist(`/usr/local/include/${inc.split(' ')[1]}`)) return []
-    const source = await readline(`/usr/local/include/${inc.split(' ')[1]}`)
+  for (let inc of io.result) {
+    const readl = await readline(`/usr/local/include/${inc.split(' ')[1]}`)
+    const source = fileIsExist(`/usr/local/include/${inc.split(' ')[1]}`)? readl.result : []
     result = result.concat(source)
   }
 
-  return result
+  return new IO(result, '')
 }
 export function pass(commander,value) {
   return new Promise((resolve, reject) => {
@@ -44,14 +43,18 @@ export function pass(commander,value) {
     });
 
     ls.stderr.on('data', (data) => {
-      if(data.toString().split(':')[0] === 'mkdir'){
-        return resolve()
+
+      switch (isMkdirOrStop(data)) {
+          case 'mkdir':
+            return resolve()
+            break;
+          case 'Stop':
+            console.log(`未找到合适命令${value}，请用help命令查看!`);
+            return
+            break;
+          default:
+          console.log(`${data}`);
       }
-      if(data.toString().indexOf('Stop') > -1) {
-        console.log(`未找到合适命令${value}，请用help命令查看!`);
-        return
-      }
-      console.log(`${data}`);
     });
 
     ls.on('close', (code) => {
@@ -63,4 +66,14 @@ export function pass(commander,value) {
 
 function fileIsExist (path) {
   return fs.existsSync(path)
+}
+function isMkdirOrStop(data){
+  return data.toString().split(':')[0] === 'mkdir'? 'mkdir': data.toString().indexOf('Stop') > -1? 'Stop' :null
+}
+
+class IO {
+  constructor(result, error) {
+    this.result = result
+    this.error = error
+  }
 }
