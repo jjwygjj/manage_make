@@ -1,9 +1,9 @@
 require("babel-core/register");
 require("babel-polyfill");
-var helper = require('./build').helper;
-var pass = require('./build').pass;
-var fetch = require('./build').fetch;
-var getIncludes = require('./build').getIncludes;
+var helper = require('./buildsrc').helper;
+var pass = require('./buildsrc').pass;
+var fetch = require('./buildsrc').fetch;
+var getIncludes = require('./buildsrc').getIncludes;
 
 var param = !!process.argv[2] && process.argv[2]!='help'&& process.argv[2]!='update'? 'pass': process.argv[2]
 switch (param) {
